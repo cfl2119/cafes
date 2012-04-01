@@ -1,5 +1,11 @@
 Cafes::Application.routes.draw do
   
+  resources :events
+
+  resources :caves
+
+  resources :drinks
+
   get "home/index"
 
   resources :users
