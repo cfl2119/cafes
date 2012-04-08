@@ -27,9 +27,9 @@ Cafes::Application.load_tasks
 
     sortedM = movies.sort_by { |title , totalRank| totalRank }
     
-    puts sortedM[0]
-    puts sortedM[1]
-    puts sortedM[2]
+    puts sortedM[0][0]
+    puts sortedM[1][0]
+    puts sortedM[2][0]
 
 
     # require 'csv'
