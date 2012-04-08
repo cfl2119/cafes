@@ -15,6 +15,13 @@
   <%= @event.end %>
 </p>
 
+</p> 
+  <b> Suggestions</b>
+  <%= Cafe.all.each do |cafe| %>
+      <%= if @event.caves.include?(cafe)%>
+      <%= cafe.name%>
+	<% end %>
+
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
