@@ -1,0 +1,24 @@
+<h1>Event Cafe Choices</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+  <%= form_tag "update_rank" do %>  
+
+  <% suggestions.each do |sug| %>
+    <tr>
+      <td><%= sug.cafe.name %></td>
+      <td><%= select(:suggestion, sug.id, Array(1..suggestions.length)) %></td>
+    </tr>
+  <% end %>
+    <div class="actions"><%= submit_tag %></div>  
+  <% end %>
+
+</table>
+
+<br />
+
+

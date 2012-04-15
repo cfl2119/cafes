@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @event.name %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @event.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @event.end %>
+</p>
+
+</p> 
+  <b> Suggestions</b>
+  <% Cafe.all.each do |cafe| %>
+    <% if @event.caves.include?(cafe)%>
+      <%= cafe.name%>
+	  <% end %>
+  <% end %>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
