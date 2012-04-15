@@ -10,6 +10,8 @@ Cafes::Application.routes.draw do
 
   resources :users
 
+    root :to => "users#new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -20,6 +22,15 @@ Cafes::Application.routes.draw do
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
+
+
+  match 'sessions/new' => 'sessions#new'
+  match 'sessions/create' => 'sessions#create', :via => :post
+  match 'sessions/destroy' => 'sessions#destroy'
+
+  match 'events/:id/rank' => 'events#rank'
+  match 'events/:id/update_rank' => 'events#update_rank', :via => :post
+
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

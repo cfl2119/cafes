@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120401193433) do
+ActiveRecord::Schema.define(:version => 20120415200731) do
 
   create_table "caves", :force => true do |t|
     t.string   "name"
@@ -43,14 +43,16 @@ ActiveRecord::Schema.define(:version => 20120401193433) do
   create_table "suggestions", :force => true do |t|
     t.integer "cafe_id"
     t.integer "event_id"
+    t.integer "rank"
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "email"
     t.integer  "phone_number"
+    t.string   "password_digest"
   end
 
 end

@@ -1,6 +1,15 @@
 class DrinksController < ApplicationController
   # GET /drinks
   # GET /drinks.json
+
+  before_filter :check_session, :except => :new
+
+def check_session 
+  if session[:user_id] ==nil
+    redirect_to "/sessions/new"
+  end
+end
+
   def index
     @drinks = Drink.all
 

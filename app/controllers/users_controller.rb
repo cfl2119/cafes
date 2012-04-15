@@ -1,6 +1,18 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+
+  
+
+before_filter :check_session, :except => :new
+
+def check_session 
+  if session[:user_id] ==nil
+    redirect_to "/sessions/new"
+  end
+end
+
+  
   def index
     @users = User.all
 

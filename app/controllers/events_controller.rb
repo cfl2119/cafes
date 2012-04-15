@@ -1,6 +1,35 @@
 class EventsController < ApplicationController
   # GET /events
   # GET /events.json
+
+before_filter :check_session, :except => [:new, :create]
+
+def rank
+  @event = Event.find(params[:id])
+  render "rank", :locals => {:suggestions => @event.suggestions}
+
+end
+
+def update_rank
+  @event =Event.find(params[:id])
+
+  @suggestions = params[:suggestion]
+  print "========="
+  print @suggestions
+  render "update_rank", :locals =>{:suggestions =>@suggestions}
+
+  #@event.update_attributes(params[:event])
+
+end
+
+
+def check_session 
+  if session[:user_id] ==nil
+    redirect_to "/sessions/new"
+  end
+end
+
+
   def index
     @events = Event.all
 
