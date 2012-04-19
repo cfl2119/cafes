@@ -1,6 +1,10 @@
 Cafes::Application.routes.draw do
   
-  resources :events
+  resources :events do
+    member do
+      get 'rank'
+    end
+  end
 
   resources :caves
 
@@ -28,8 +32,8 @@ Cafes::Application.routes.draw do
   match 'sessions/create' => 'sessions#create', :via => :post
   match 'sessions/destroy' => 'sessions#destroy'
 
-  match 'events/:id/rank' => 'events#rank'
-  match 'events/:id/update_rank' => 'events#update_rank', :via => :post
+  # match 'events/:id/rank' => 'events#rank'
+  # match 'events/:id/update_rank' => 'events#update_rank', :via => :post
 
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
