@@ -1,6 +1,6 @@
 class SuggestionsControllerController < ApplicationController
 
- def update
+  def update
     @suggestion = Suggestion.find(params[:id])
 
     respond_to do |format|
@@ -13,7 +13,5 @@ class SuggestionsControllerController < ApplicationController
       end
     end
   end
-
-
 
 end

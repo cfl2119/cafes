@@ -4,13 +4,13 @@ class CavesController < ApplicationController
 
 
 
-before_filter :check_session, :except => :new
+  before_filter :check_session
 
-def check_session 
-  if session[:user_id] ==nil
-    redirect_to "/sessions/new"
+  def check_session 
+    if session[:user_id] ==nil
+      redirect_to "/sessions/new"
+    end
   end
-end
 
 
   def index
