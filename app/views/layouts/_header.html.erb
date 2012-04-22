@@ -1,0 +1,19 @@
+<header class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <nav>
+        <div>
+        <ul class="nav pull-left">
+          <li><%= link_to "Events", :controller =>"events", :action => "index" %></li>
+          <li><%= link_to "Cafes",  :controller => "caves", :action =>"index" %></li>
+        </ul>
+        <ul class="nav pull-right">
+          <li> <%= link_to "Sign out", :controller =>"sessions", :action =>"destroy" %>
+          <li><%= (@current_user ? @current_user.email : " Not logged in ") %></li>
+        </ul>
+      </div>
+      </nav>
+    </div>
+  </div>
+
+</header>
