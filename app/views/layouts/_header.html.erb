@@ -3,13 +3,18 @@
     <div class="container">
       <nav>
         <div>
+        <ul class="nav pull-right">
+          <% if current_user %>
+          <li> <%= link_to "Sign out", :controller =>"sessions", :action =>"destroy" %>
+          <li><%= (@current_user ? @current_user.email : "") %></li>
+        </ul>
         <ul class="nav pull-left">
           <li><%= link_to "Events", :controller =>"events", :action => "index" %></li>
           <li><%= link_to "Cafes",  :controller => "caves", :action =>"index" %></li>
-        </ul>
-        <ul class="nav pull-right">
-          <li> <%= link_to "Sign out", :controller =>"sessions", :action =>"destroy" %>
-          <li><%= (@current_user ? @current_user.email : " Not logged in ") %></li>
+           
+            <% else %>
+            <li> <%= link_to "Sign in", :controller =>"sessions", :action =>"new" %></li>
+          <% end %>
         </ul>
       </div>
       </nav>
