@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <% if current_user %>
           <li> <%= link_to "Sign out", :controller =>"sessions", :action =>"destroy" %>
-          <li><%= (@current_user ? @current_user.email : "") %></li>
+          <li><%= (current_user ? current_user.email : " Not logged in") %></li>
         </ul>
         <ul class="nav pull-left">
           <li><%= link_to "Events", :controller =>"events", :action => "index" %></li>

@@ -4,15 +4,6 @@ class CavesController < ApplicationController
 
 
 
-  before_filter :check_session
-
-  def check_session 
-    if session[:user_id] ==nil
-      redirect_to "/sessions/new"
-    end
-  end
-
-
   def index
     @caves = Cafe.all
 
