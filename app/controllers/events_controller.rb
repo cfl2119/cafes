@@ -54,7 +54,11 @@ class EventsController < ApplicationController
 
         unless id.blank?
           cafe = Cafe.find(id)
-          @event.caves << cafe unless @event.caves.include? cafe
+          if @event.caves.include? cafe 
+            flash[:notice]= "This cafe has already been suggested!"
+          else
+            @event.caves << cafe 
+          end
         end
 
       end
