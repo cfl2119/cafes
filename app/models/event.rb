@@ -5,6 +5,15 @@ class Event < ActiveRecord::Base
   has_many :invitations, :dependent => :destroy
   has_many :users, :through => :invitations
 
+  def is_invited
+    if Invitation.current_user.id
+      return true
+    else
+      return false
+    end
+  end
+
+
 
   def rankings(user)
     return Ranking.where(:suggestion_id => self.suggestions.collect(&:id), :guest_id => user.id)

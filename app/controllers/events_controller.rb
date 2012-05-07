@@ -8,24 +8,40 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if params[:suggestions]
+      prob = false
       for suggestion in @event.suggestions
 
-        ranking = Ranking.where(:suggestion_id => suggestion.id, :guest_id => current_user.id).first
-
-        if ranking
-          if params[:suggestions][suggestion.id.to_s]
-            ranking.value = params[:suggestions][suggestion.id.to_s]
-          else
-            ranking.value = 0
+        params[:suggestions].each do |ak, av| 
+          params[:suggestions].each do |bk, bv|
+            if av==bv and ak != bk 
+              
+              prob = true
+            end
           end
-          ranking.save
+        end
+        if prob
+          flash[:notice]= "Your entry was not saved. You cannot enter the same rank for more than one cafe!"
         else
+          ranking = Ranking.where(:suggestion_id => suggestion.id, :guest_id => current_user.id).first
+
+          if ranking
+
+            if params[:suggestions][suggestion.id.to_s]
+              ranking.value = params[:suggestions][suggestion.id.to_s]
+            else
+              ranking.value = 0
+            end
+            ranking.save
+          else
           ranking = Ranking.create(:suggestion_id => suggestion.id, 
                                   :guest_id => current_user.id, 
-                                  :value => params[:suggestions][suggestion.id.to_s])
+                                  :value => params[:suggestions][suggestion.id.to_s])          
+          end
         end
       end
-      redirect_to event_path(@event)
+        redirect_to event_path(@event)
+
+
     end
   end
 
@@ -43,7 +59,7 @@ class EventsController < ApplicationController
 
       end
       render "show"
-    else  
+    else
       render "suggest" 
     end
 
