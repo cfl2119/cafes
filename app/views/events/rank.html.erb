@@ -1,24 +1,22 @@
-<h1>Event Cafe Choices</h1>
+<h1><%= @event.name %></h1>
+<br/>
+<%= semantic_form_for :suggestions , :url => rank_event_url(@event), :html => {:method => :post } do |f| %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-  </tr>
+  Suggested Cafes:<br/><br/>
+  <%= f.inputs do %>
+    <% @event.suggestions.each do |suggestion| %>
 
-  <%= form_tag "update_rank" do %>  
+      <% ranking = Ranking.where(:suggestion_id => suggestion.id, :guest_id => current_user.id).first %>
 
-  <% suggestions.each do |sug| %>
-    <tr>
-      <td><%= sug.cafe.name %></td>
-      <td><%= select(:suggestion, sug.id, Array(1..suggestions.length)) %></td>
-    </tr>
-  <% end %>
-    <div class="actions"><%= submit_tag %></div>  
+      <%= f.input "#{suggestion.id}", :as => :select, :collection => 1..@event.suggestions.length, 
+            :selected => ranking.nil? ? '' : ranking.value, 
+            :label => suggestion.cafe.name, :include_blank => false %>
+      <% end %>
   <% end %>
 
-</table>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :label => "Rank" %>
+  <% end %>
 
-<br />
-<%= link_to 'Logout', :controller =>"sessions", :action =>"destroy" %>
 
+<% end %>

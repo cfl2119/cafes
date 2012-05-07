@@ -1,4 +1,38 @@
-<%= semantic_form_for @event do |f| %>
-  <%= f.inputs %>
-  <%= f.actions %>
-<% end %>
+<%= semantic_form_for([@event], :html => { :id => "app_form"}) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<%= f.inputs do %>
+    	<%= f.input :name, :as => :wrapped_string %>
+    	<%= f.input :start, :as => :datetime %>
+	<% end %>
+
+	<h3>Suggested Cafes:</h3>
+	<% Cafe.all.each do |cafe| %>
+		<%= check_box_tag :cafe_ids, cafe.id, @event.caves.include?(cafe), :name => 'event[cafe_ids][]'%>
+		<%= cafe.name %>
+		<br/>
+	<% end %>
+
+
+		<br/>
+		<h3>Invite:</h3>
+		<% User.all.each do |user| %>
+    <%= check_box_tag :user_ids, user.id, @event.users.include?(user), :name => 'event[user_ids][]'%>
+      	<%= user.name %>
+		<% end %>
+
+
+	<br/><br/>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  	<% end %>

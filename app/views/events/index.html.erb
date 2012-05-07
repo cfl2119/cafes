@@ -1,3 +1,6 @@
 
 <h1>Listing events</h1>
 <%= render @events || 'There are no events entered at the moment' %>
+<% if admin? %>
+	<%= link_to 'Add Event', :controller => 'events', :action => 'new' %>
+<% end %>

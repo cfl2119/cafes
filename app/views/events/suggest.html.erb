@@ -1,0 +1,18 @@
+
+<h1><%= @event.name %></h1>
+<br/>
+<%= semantic_form_for :suggestions , :url => suggest_cafes_event_url(@event), :html => {:method => :post } do |f| %>
+
+  Cafes for Suggestion:<br /><br />
+  <%= f.inputs do %>
+
+
+    <%= f.input :cafes, :as => :check_boxes, :collection => Cafe.all %>
+    
+<% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :label => "Suggest" %>
+  <% end %>
+
+
+<% end %>

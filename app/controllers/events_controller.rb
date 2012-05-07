@@ -2,33 +2,70 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
 
+  before_filter :check_admin, :except => [:index, :show, :suggest_cafes, :rank]
+
   def rank
     @event = Event.find(params[:id])
-    render "rank", :locals => {:suggestions => @event.suggestions}
 
+    if params[:suggestions]
+      for suggestion in @event.suggestions
+
+        ranking = Ranking.where(:suggestion_id => suggestion.id, :guest_id => current_user.id).first
+
+        if ranking
+          if params[:suggestions][suggestion.id.to_s]
+            ranking.value = params[:suggestions][suggestion.id.to_s]
+          else
+            ranking.value = 0
+          end
+          ranking.save
+        else
+          ranking = Ranking.create(:suggestion_id => suggestion.id, 
+                                  :guest_id => current_user.id, 
+                                  :value => params[:suggestions][suggestion.id.to_s])
+        end
+      end
+      redirect_to event_path(@event)
+    end
   end
 
-  def update_rank
-    @event =Event.find(params[:id])
 
-    @suggestions = params[:suggestion]
-    print "========="
-    print @suggestions
-    render "update_rank", :locals =>{:suggestions =>@suggestions}
+  def suggest_cafes
+    @event = Event.find(params[:id])
 
-    #@event.update_attributes(params[:event])
+    if params[:suggestions] and params[:suggestions][:cafes]
+      for id in params[:suggestions][:cafes]
+
+        unless id.blank?
+          cafe = Cafe.find(id)
+          @event.caves << cafe unless @event.caves.include? cafe
+        end
+
+      end
+      render "show"
+    else  
+      render "suggest" 
+    end
 
   end
 
 
   def index
-    @events = Event.all
+    if admin? 
+      @events = Event.all
+    else
+
+        @events = current_user.events
+
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
     end
   end
+
+
 
   # GET /events/1
   # GET /events/1.json
@@ -46,15 +83,32 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
 
+    
+
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @event }
     end
+
+
   end
 
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+
+    if params[:invitations] and params[:invitations][:users]
+      for id in params[:invitations][:users]
+
+        unless id.blank?
+          user = User.find(id)
+          @event.users << user unless @event.users.include? user
+        end
+
+      end
+
+    end
   end
 
   # POST /events

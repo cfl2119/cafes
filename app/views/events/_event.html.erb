@@ -1,9 +1,19 @@
-<p>Name: <%= event.name %></p>
+
+<% if admin? %>
+<p>Name: <%= link_to event.name, event %></p>
 <p>Start Time: <%= event.start %> </p>
-<p>End Time: <%= event.end %> </p>
-<%= link_to 'Show', event %>
+
 <%= link_to 'Edit', edit_event_path(event) %>
 <%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %>
+
+
+<% else %>
+
+<p>Name: <%= link_to event.name, event %></p>
+<p>Start Time: <%= event.start %> </p>
+
+
+<% end %>
 
 <p></p>
 <br>

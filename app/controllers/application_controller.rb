@@ -1,14 +1,20 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  @current_user
   
   before_filter :check_session
 
+
+  def check_admin
+    return true if admin?
+    redirect_to root_url
+  end
+
+
+
   def check_session 
-    if session[:user_id] ==nil
-      redirect_to "/users/new"
-    end
+    return true if current_user
+    redirect_to root_url
   end
  
   force_ssl
@@ -20,5 +26,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  helper_method :admin?
+
+  def admin?
+    if current_user.admin 
+      return true
+    else 
+      return false
+    end
+  end
 
 end

@@ -12,3 +12,8 @@
  *= require_tree .
  *= require formtastic
 */
+
+body, html {margin:0;padding-left:20px; padding-right:20px; color:#616566;}
+.app-clear {clear:both;margin:0;padding:0;}
+
+html {background:#eee;}

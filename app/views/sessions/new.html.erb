@@ -1,7 +1,8 @@
-<h1> Log in</h1>
 
 
-
+<center>
+  <h1>Log in </h1>
+<div>
 <%= form_tag "/sessions/create" do %>  
   <div class="field">  
     <div><%= label_tag :email %>  </div>
@@ -12,12 +13,21 @@
     <div><%= password_field_tag :password %>  </div>
   </div>  
   <div class="actions"><%= submit_tag "Log in" %></div>  
-
-<div>
-	<% if !flash[:notice].nil? %>
-		<%= flash[:notice] %>
-	<% end %>
 </div>
 
-<%= link_to 'Sign up', :controller => 'users', :action => 'new' %>
+  <%= image_tag "cups.gif", :size=> "450x350"%>
+
+
+<div>
+  <% if !flash[:notice].nil? %>
+    <%= flash[:notice] %>
+  <% end %>
+</div>
+
 <% end %>
+
+</center>
+
+
+
+

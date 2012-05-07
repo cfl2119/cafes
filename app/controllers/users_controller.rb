@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   
   skip_before_filter :check_session, :only => [:new, :create]
-
+  before_filter :check_admin, :except => [:new, :create, :edit, :update]
   
   def index
     @users = User.all

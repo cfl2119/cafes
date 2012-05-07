@@ -1,33 +1,66 @@
+/* universal */
+
+body {
+  padding-left: 100px;
+  padding-right: 100px;
+
+
+}
+
+h1 {  
+  font-family: 'Just Me Again Down Here'; 
+  font-size: 2.5em;
+  color:#4B0082;
+  text-transform:uppercase;
+  }
+
+
+
 /* header */
 
+header {
+  color:#4B0082;
+  font-weight: bold;
+  text-transform: uppercase; 
+  margin-right: 10px;
+  font-family: 'Just Me Again Down Here'; 
 
+}
 
 header a {
+  color:#4B0082;
+  font-family: 'Just Me Again Down Here';
   float: left;
   margin-right: 10px;
-  font-size: 1.5em;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
+ text-transform: uppercase;
+/*  letter-spacing: -1px;*/
+  padding-top: 20px;
+/*  font-weight: bold;*/
   line-height: 1;
 }
 
 header ul li {
+/*  background-color: #99CCFF; */
   list-style:none;
   display:inline-block;
+
 }
 
 header ul.pull-left li{
   float:left;
+  font-size:2em;
+  
 }
 
 header ul.pull-right li {
   float:right;
+  font-family: 'Just Me Again Down Here';
+  font-size: 2em;
 }
 
 header a:hover {
-  color: #fff;
+
+  color:#4B0082;
   text-decoration: none;
 }
 

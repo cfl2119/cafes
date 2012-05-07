@@ -3,6 +3,10 @@ Cafes::Application.routes.draw do
   resources :events do
     member do
       get 'rank'
+      post 'rank'
+
+      get 'suggest_cafes'
+      post 'suggest_cafes'
     end
   end
 
@@ -27,7 +31,7 @@ Cafes::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-
+  #match 'events/:id/suggest' => 'events#suggest_cafes'
   match 'sessions/new' => 'sessions#new'
   match 'sessions/create' => 'sessions#create', :via => :post
   match 'sessions/destroy' => 'sessions#destroy'

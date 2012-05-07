@@ -3,6 +3,7 @@ class CavesController < ApplicationController
   # GET /caves.json
 
 
+  before_filter :check_admin, :except => [:index, :show, :create, :new]
 
   def index
     @caves = Cafe.all

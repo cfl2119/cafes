@@ -1,7 +1,29 @@
+<h1>Sign up</h1>
+<br/>
 
-<h2> Sign Up! </h2>
-<%= semantic_form_for @user do |f| %>
-  <%= f.inputs :name, :email, :phone_number %>
-  <%= f.input :password_digest, :label =>"Password" %>
-  <%= f.actions %>
+<%= semantic_form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+	<%= f.inputs do %>
+    <%= f.input :name, :as => :wrapped_string %>
+  	<%= f.input :email, :as => :wrapped_string %>
+		<%= f.input :password, :as => :wrapped_password %>
+		<%= f.input :password_confirmation, :as => :wrapped_password %>
+	<% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
 <% end %>
